@@ -44,3 +44,47 @@ This repo assumes:
 - TLS: `scripts/verify-tls.sh argocd.test.weinz.at`
 - Ingress: `scripts/verify-ingress.sh`
 - Persistence: `scripts/verify-persistence.sh n8n`
+
+## Repository Structure
+
+```text
+k8s-homelab-testcluster/
+├─ README.md
+├─ docs/
+│  ├─ architecture.md
+│  ├─ decisions.md
+│  ├─ troubleshooting.md
+│  └─ test-protocol.md
+├─ cluster/
+│  ├─ namespaces/
+│  │  ├─ argocd-namespace.yaml
+│  │  └─ n8n-namespace.yaml
+│  ├─ ingress-nginx/
+│  │  └─ README.md
+│  ├─ metallb/
+│  │  └─ README.md
+│  └─ cert-manager/
+│     ├─ README.md
+│     └─ clusterissuer-letsencrypt-dns.yaml
+├─ apps/
+│  ├─ argocd/
+│  │  ├─ README.md
+│  │  └─ helm/
+│  │     ├─ values.yaml
+│  │     └─ NOTES.md
+│  └─ n8n/
+│     ├─ README.md
+│     ├─ storage/
+│     │  ├─ pv-hostpath.yaml
+│     │  └─ pvc.yaml
+│     ├─ helm/
+│     │  ├─ values-n8n-chart-1.0.0.yaml
+│     │  ├─ values-n8n-chart-2.0.1.yaml
+│     │  └─ NOTES.md
+│     └─ test/
+│        └─ pod-restart-data-persistence-test.md
+└─ scripts/
+   ├─ verify-tls.sh
+   ├─ verify-ingress.sh
+   └─ verify-persistence.sh
+
