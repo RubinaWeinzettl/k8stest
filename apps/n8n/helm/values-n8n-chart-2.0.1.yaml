@@ -1,0 +1,35 @@
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-dns
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+  hosts:
+    - host: n8n.test.weinz.at
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - secretName: n8n-tls
+      hosts:
+        - n8n.test.weinz.at
+
+extraEnv:
+  - name: DB_TYPE
+    value: sqlite
+  - name: N8N_HOST
+    value: n8n.test.weinz.at
+  - name: N8N_PROTOCOL
+    value: https
+  - name: WEBHOOK_URL
+    value: https://n8n.test.weinz.at/
+  - name: N8N_EDITOR_BASE_URL
+    value: https://n8n.test.weinz.at/
+
+persistence:
+  enabled: true
+  existingClaim: n8n-pvc
+  mountPath: /home/node/.n8n
+
